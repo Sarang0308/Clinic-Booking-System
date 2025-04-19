@@ -19,6 +19,9 @@ const PatientDashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-yellow-200 via-rose-200 to-cyan-200 p-10">
+      <button onClick={() => window.location.href = '/appointment-form'} className="bg-gradient-to-r from-pink-500 to-violet-500 text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition mb-6">
+          Book an Appointment
+      </button>
       <h2 className="text-3xl font-bold mb-6 text-center text-rose-700">My Appointments</h2>
       <div className="grid gap-4">
         {appointments.map((appt) => (

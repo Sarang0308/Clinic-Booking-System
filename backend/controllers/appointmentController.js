@@ -18,11 +18,19 @@ exports.createAppointment = async (req, res) => {
   }
 };
 
+exports.getAllDoctors = async (req, res) => {
+  try {
+    const doctors = await User.find({ role: 'doctor' }).select('name _id');
+    res.json(doctors);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch doctors' });
+  }
+};
+
 exports.getPatientAppointments = async (req, res) => {
   try {
     const appointments = await Appointment.find({ patientId: req.user.id });
-    console.log('Raw Appointments:', appointments);
-
+    //console.log('Raw Appointments:', appointments);
     res.json(appointments);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch patient appointments' });
@@ -31,8 +39,9 @@ exports.getPatientAppointments = async (req, res) => {
 
 exports.getDoctorAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find({ doctorId: req.user.id }).populate('patientId', 'name email');
-    res.json(appointments);
+    const appointments = await Appointment.find({ doctorId: req.user.id });
+    res.json(appointments)
+    ;
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch doctor appointments' });
   }

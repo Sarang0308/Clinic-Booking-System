@@ -40,6 +40,7 @@ const DoctorDashboard = () => {
               <p>Time: {new Date(appt.time).toLocaleString()}</p>
               <p>Status: <span className={`font-bold ${appt.status === 'approved' ? 'text-green-600' : appt.status === 'rejected' ? 'text-red-600' : 'text-yellow-600'}`}>{appt.status}</span></p>
             </div>
+            {(appt.status === 'pending') && (
             <div className="flex gap-2">
               <button
                 onClick={() => updateStatus(appt._id, 'approved')}
@@ -54,6 +55,7 @@ const DoctorDashboard = () => {
                 Reject
               </button>
             </div>
+            )}
           </div>
         ))}
       </div>

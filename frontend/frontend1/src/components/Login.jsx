@@ -18,11 +18,12 @@ const Login = () => {
       const data = res.data;
       if (data.token) {
         localStorage.setItem('token', data.token);
-        localStorage.setItem('role', data.user.role);
-        localStorage.setItem('userId', data.user._id);
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('userId', data.userId);
         alert('Login successful');
-  
-        window.location.href = data.user.role === 'doctor' ? '/doctor' : '/patient';
+        console.log('Login successful', data);
+
+        window.location.href = data.role === 'doctor' ? '/doctor' : '/patient';
       } else {
         alert(data.message || 'Login failed');
       }
@@ -42,8 +43,8 @@ const Login = () => {
       <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-bold text-center mb-4">Doctor/Patient Login</h2>
         <input
-          name="username"
-          value={form.username}
+          name="email"
+          value={form.email}
           onChange={handleChange}
           placeholder="Username"
           className="w-full mb-4 px-4 py-2 border rounded-lg"

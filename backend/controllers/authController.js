@@ -14,6 +14,15 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.getAllDoctors = async (req, res) => {
+  try {
+    const doctors = await User.find({ role: 'doctor' }, 'name _id');
+    res.json(doctors);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch doctors' });
+  }
+};
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
